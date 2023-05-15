@@ -1,17 +1,17 @@
 <template>
-  <h3>Babylon Expert</h3>
+  <h3>Babylon Immortal</h3>
   <canvas></canvas>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {StandardMaterials} from "@/babylon/standardMaterials";
+import {PBR} from "@/babylon/PBR";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
       const canvas:any = document.querySelector("canvas")
-        new StandardMaterials(canvas)
+        new PBR(canvas)
     }
 });
 </script>
