@@ -5,13 +5,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {PBR} from "@/babylon/PBR";
+import {CustomModels} from "@/babylon/customModels";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
       const canvas:any = document.querySelector("canvas")
-        new PBR(canvas)
+        new CustomModels(canvas)
     }
 });
 </script>
