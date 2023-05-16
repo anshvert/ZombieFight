@@ -1,17 +1,17 @@
 <template>
-  <h3>Babylon Immortal</h3>
+  <h3>Babylon Immortals</h3>
   <canvas></canvas>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {CustomModels} from "@/babylon/customModels";
+import {LightScene} from "@/babylon/LightsShadows";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
       const canvas:any = document.querySelector("canvas")
-        new CustomModels(canvas)
+        new LightScene(canvas)
     }
 });
 </script>
