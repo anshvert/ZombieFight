@@ -1,29 +1,16 @@
 <template>
-  <main>
-    <div id="loader">
-      <p>Loading</p>
-      <div id="loadingContainer">
-        <div id="loadingBar"></div>
-      </div>
-      <p id="percentLoaded">25%</p>
-    </div>
-    <p>Custom Loading Screen</p>
   <canvas></canvas>
-  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {CustomLoading} from "@/babylon/CustomLoading";
+import {CameraMechanics} from "@/babylon/CameraMechanics";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
-      const canvas = document.querySelector("canvas") as HTMLCanvasElement
-      const loadingBar = document.getElementById("loadingBar") as HTMLElement
-      const percentLoaded = document.getElementById("percentLoaded") as HTMLElement
-      const loader = document.getElementById("loader") as HTMLElement
-      new CustomLoading(canvas,loadingBar,percentLoaded,loader)
+    const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+    new CameraMechanics(canvas)
     }
 });
 </script>
