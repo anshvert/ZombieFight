@@ -1,16 +1,15 @@
 <template>
-  <ProductPreview/>
+  <BabylonV1/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BabylonV1 from "@/components/babylon.vue";
-import ProductPreview from "@/components/ProductPreview.vue";
 
 export default defineComponent({
   name: 'App',
   components: {
-      ProductPreview
+      BabylonV1
   }
 });
 </script>
