@@ -15,7 +15,7 @@ import {
     DirectionalLight,
     PointLight,
     SpotLight,
-    ShadowGenerator,
+    ShadowGenerator, CubeTexture,
 } from "@babylonjs/core";
 import "@babylonjs/loaders";
 
@@ -28,6 +28,7 @@ export class LightScene {
 
     constructor(private canvas: HTMLCanvasElement) {
         this.engine = new Engine(this.canvas, true);
+        this.engine.displayLoadingUI()
         this.scene = this.CreateScene();
         this.CreateEnvironment().then().catch((e)=>{console.log(e)});
         this.engine.runRenderLoop(() => {
@@ -43,10 +44,12 @@ export class LightScene {
         // camera.rotation = newDirection;
         const target = new Vector3(0, 4, 0); // Update the target position if needed
         camera.setTarget(target);
-
         return scene;
     }
     async CreateEnvironment(): Promise<void> {
+        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/sky.env",this.scene)
+        this.scene.environmentTexture = envTex
+        this.scene.createDefaultSkybox(envTex,true)
         const { meshes } = await SceneLoader.ImportMeshAsync(
             "",
             "./models/",
@@ -57,7 +60,8 @@ export class LightScene {
         //this.CreateLightHouse().then().catch((e)=>{console.log(e)})
         // const glowLayer = new GlowLayer("glowLayer", this.scene);
         // glowLayer.intensity = 3;
-        this.CreateLights()
+        //this.CreateLights()
+        this.engine.hideLoadingUI()
     }
     CreateLights():void {
         const pointLight = new PointLight("pointLight",new Vector3(0,4,0),this.scene)
