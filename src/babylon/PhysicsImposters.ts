@@ -41,6 +41,11 @@ export class PhysicsImposters {
             "Prototype_Level.glb",
             this.scene
         );
+        meshes.map((mesh)=>{
+            if (mesh.name == "Ramp") {
+                mesh.position = new Vector3(12,0,0)
+            }
+        })
     }
     CreateImposters():void {
         const box = MeshBuilder.CreateBox("box",{size:2})
