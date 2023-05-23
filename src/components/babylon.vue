@@ -4,13 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {PhysicsForces} from "@/babylon/PhysicsForces";
+import {Raycasting} from "@/babylon/Raycasting";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
     const canvas = document.querySelector("canvas") as HTMLCanvasElement;
-    new PhysicsForces(canvas)
+    new Raycasting(canvas)
     }
 });
 </script>
