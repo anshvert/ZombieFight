@@ -4,13 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import {CharacterAnimations} from "@/babylon/CharacterAnimations";
+import {CutScene} from "@/babylon/CutScene";
 
 export default defineComponent({
   name: 'BabylonV1',
     mounted() {
     const canvas = document.querySelector("canvas") as HTMLCanvasElement;
-    new CharacterAnimations(canvas)
+    new CutScene(canvas)
     }
 });
 </script>
