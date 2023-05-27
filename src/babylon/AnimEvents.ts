@@ -14,7 +14,7 @@ import {
     ActionManager,
     ExecuteCodeAction,
     Texture,
-    Matrix, AbstractMesh, Animation, Mesh, AnimationGroup, AnimationEvent
+    Matrix, AbstractMesh, Animation, Mesh, AnimationGroup, AnimationEvent, Sound
 } from "@babylonjs/core";
 import "@babylonjs/loaders";
 import Ammo from "ammojs-typed"
@@ -61,6 +61,10 @@ export class AnimEvents {
                 mesh.setEnabled(false)
             }
         })
+        const backgroundMusic = new Sound("backgroundMusic","./audio/terror_ambience.mp3",this.scene,null,{
+            volume:0.1,
+            autoplay:true
+        })
     }
     async CreateCharacter():Promise<void> {
         const {meshes,animationGroups} = await SceneLoader.ImportMeshAsync("","./models/","character_attack.glb",this.scene);
@@ -85,12 +89,24 @@ export class AnimEvents {
         }
     }
     async CreateZombie():Promise<void> {
-        const {meshes,animationGroups} = await SceneLoader.ImportMeshAsync("","/models/","zombie_death.glb")
+        const {meshes,animationGroups} = await SceneLoader.ImportMeshAsync("","/models/","zombie_1.glb")
         meshes[0].rotate(Vector3.Up(),Math.PI/2)
         meshes[0].position = new Vector3(-3,0,0)
+        animationGroups[0].stop()
+        const growlFx = new Sound("growlFx","./audio/growl.mp3",this.scene,null,{
+            spatialSound:true,
+            maxDistance:15,
+            autoplay:true
+        })
+        growlFx.setPosition(new Vector3(-3,0,0))
+        growlFx.setPlaybackRate(1.88)
+        const growlAnim = animationGroups[0].targetedAnimations[0].animation
+        const growlEvt = new AnimationEvent(70,()=>{
+            growlFx.play()
+        },false)
+        growlAnim.addEvent(growlEvt)
         this.zombieAnimations = animationGroups
-        this.zombieAnimations[0].stop()
-        this.zombieAnimations[1].play()
+        animationGroups[0].play(true)
     }
     async CreateCutScene():Promise<void> {
         const camKeys=  []
