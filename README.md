@@ -1,4 +1,4 @@
-# v1
+# 3D Anime Fight using BabylonJS
 
 ## Project setup
 ```
